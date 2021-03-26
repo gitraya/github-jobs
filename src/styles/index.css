@@ -14,6 +14,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0px 8%;
+  background: #f6f7fb;
 }
 
 .App-logo {
@@ -36,6 +37,7 @@ main {
   grid-template-areas:
     'search search'
     'aside main';
+  gap: 1.5rem;
 }
 .search-section {
   grid-area: search;
@@ -54,7 +56,7 @@ main {
 .search-box form {
   width: 70%;
 }
-.input-control.search {
+.input-control {
   display: flex;
   position: relative;
   width: 100%;
@@ -94,8 +96,90 @@ main {
   padding: 14px 48px;
 }
 
-aside {
+.filterjobs-section {
   grid-area: aside;
+  display: flex;
+  flex-direction: column;
+}
+.filter-fulltime form {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+.filter-fulltime form input {
+  width: 18px;
+  height: 18px;
+  margin: 0px 10px 0px 12px;
+  border: 1px solid #b9bdcf;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.filter-fulltime form label {
+  font-size: 0.875rem;
+  color: #334680;
+  font-weight: 500;
+  cursor: pointer;
+}
+.search-location {
+  padding: 0.5rem 0px;
+  display: flex;
+  flex-direction: column;
+}
+.search-location label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #b9bdcf;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.input-control.location {
+  margin-top: 0.875rem;
+}
+.input-control.location i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b9bdcf;
+  font-size: 1.2rem;
+}
+.input-control.location input {
+  width: 100%;
+  color: #282538;
+  border: 2px solid #fff;
+  padding: 18px 14px 18px 40px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+.input-control.location input::placeholder {
+  color: #b9bdcf;
+}
+
+.filter-location {
+  padding: 1rem 0px;
+}
+.filter-location form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.75rem;
+}
+.radio-group {
+  display: flex;
+}
+.radio-group input {
+  width: 18px;
+  height: 18px;
+  margin: 0px 12px;
+}
+.radio-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #334680;
+  cursor: pointer;
+}
+
+aside {
   font-family: 'Poppins', sans-serif;
 }
 
