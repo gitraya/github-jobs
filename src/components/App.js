@@ -26,7 +26,22 @@ function App() {
         <SearchJobs />
         <FilterJobs />
         <section className="jobslist-section">
-          <div className="container-jobscards"></div>
+          <div className="container-jobscards">
+            <div>
+              <div></div>
+              <div>
+                <span>Kasisto</span>
+                <h2>Front-End Software Engineer</h2>
+                <button>Full time</button>
+              </div>
+              <div>
+                <span>
+                  <i className="material-icons-round">public</i>New York
+                </span>
+                <span>5 days ago</span>
+              </div>
+            </div>
+          </div>
           <div className="jobs-pagination"></div>
         </section>
       </main>
