@@ -1,4 +1,20 @@
+// import { useEffect } from 'react';
+import SearchJobs from 'components/SearchJobs';
+import FilterJobs from 'components/FilterJobs';
+
 function App() {
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await fetch(
+  //       'https://cors-anywhere-venky.herokuapp.com/https://jobs.github.com/positions.json?search=node'
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => console.log(data))
+  //       .catch((err) => console.log(err));
+  //   };
+  //   getData();
+  // }, []);
+
   return (
     <div className="App">
       <header>
@@ -7,65 +23,12 @@ function App() {
         </div>
       </header>
       <main>
-        <section className="search-section">
-          <div className="search-box">
-            <form>
-              <div className="input-control search">
-                <i class="material-icons-round">work_outline</i>
-                <input
-                  className="input-search"
-                  id="search"
-                  name="search"
-                  type="text"
-                  placeholder="Title, companies, expertise or benefits"
-                />
-                <input className="submit-search" type="submit" value="Search" />
-              </div>
-            </form>
-          </div>
+        <SearchJobs />
+        <FilterJobs />
+        <section className="jobslist-section">
+          <div className="container-jobscards"></div>
+          <div className="jobs-pagination"></div>
         </section>
-        <aside className="filterjobs-section">
-          <div className="filter-fulltime">
-            <form action="">
-              <input id="fulltime" name="fulltime" type="checkbox" />
-              <label htmlFor="fulltime">Full time</label>
-            </form>
-          </div>
-          <div className="search-location">
-            <form action="">
-              <label htmlFor="location">location</label>
-              <div className="input-control location">
-                <i className="material-icons-round">public</i>
-                <input
-                  id="location"
-                  name="location"
-                  type="text"
-                  placeholder="City, state, zip code or country"
-                />
-              </div>
-            </form>
-          </div>
-          <div className="filter-location">
-            <form action="">
-              <div className="radio-group">
-                <input type="radio" name="filterlocation" id="loc-1" />
-                <label htmlFor="loc-1">London</label>
-              </div>
-              <div className="radio-group">
-                <input type="radio" name="filterlocation" id="loc-2" />
-                <label htmlFor="loc-2">Amsterdam</label>
-              </div>
-              <div className="radio-group">
-                <input type="radio" name="filterlocation" id="loc-3" />
-                <label htmlFor="loc-3">New York</label>
-              </div>
-              <div className="radio-group">
-                <input type="radio" name="filterlocation" id="loc-4" />
-                <label htmlFor="loc-4">Berlin</label>
-              </div>
-            </form>
-          </div>
-        </aside>
       </main>
     </div>
   );
