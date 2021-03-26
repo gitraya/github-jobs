@@ -4,7 +4,7 @@ import JobCard from 'components/JobCard';
 
 const JobLists = ({ data }) => {
   const renderJobCard = data.map((job) => {
-    return <JobCard key={uuidv4()} data={job} />;
+    return <JobCard key={uuidv4()} innerKey={uuidv4()} data={job} />;
   });
   return (
     <section className="jobslist-section">
