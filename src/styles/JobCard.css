@@ -1,0 +1,76 @@
+.job-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 12px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+.card-logo {
+  min-width: 6rem;
+  max-width: 6rem;
+  height: 5.625rem;
+}
+.card-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: contain;
+  object-position: center;
+}
+.card-logo span {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #bdbdbd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f2;
+}
+.card-desc {
+  display: flex;
+  flex-direction: column;
+}
+.card-desc .company {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334680;
+}
+.card-desc .role {
+  font-size: 1.125;
+  font-weight: 400;
+  color: #334680;
+  margin: 0.5rem 0px;
+}
+.card-desc .full {
+  width: fit-content;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #334680;
+  padding: 6px 8px;
+  background: none;
+  border: 1px solid #334680;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+.card-time {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+  right: 12px;
+  bottom: 12px;
+}
+.card-time span {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #b7bcce;
+}

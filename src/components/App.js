@@ -1,19 +1,36 @@
-// import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Footer from 'components/Footer';
 import SearchJobs from 'components/SearchJobs';
 import FilterJobs from 'components/FilterJobs';
+import JobLists from 'components/JobLists';
 
 function App() {
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     await fetch(
-  //       'https://cors-anywhere-venky.herokuapp.com/https://jobs.github.com/positions.json?search=node'
-  //     )
-  //       .then((res) => res.json())
-  //       .then((data) => console.log(data))
-  //       .catch((err) => console.log(err));
-  //   };
-  //   getData();
-  // }, []);
+  const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
+  const [allJobs, setAllJobs] = useState(null);
+
+  const checkUrl = (search) => {
+    return `https://jobs.github.com/positions.json${
+      search ? `?search=${search}` : ''
+    }`;
+  };
+
+  const getData = async (value) => {
+    await fetch(`${cors_api}${checkUrl(value)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllJobs(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const jobSearch = (value) => {
+    getData(value);
+  };
+
+  useEffect(() => {
+    if (!allJobs) return getData();
+  }, [allJobs]);
 
   return (
     <div className="App">
@@ -23,28 +40,11 @@ function App() {
         </div>
       </header>
       <main>
-        <SearchJobs />
+        <SearchJobs sendSearch={jobSearch} />
         <FilterJobs />
-        <section className="jobslist-section">
-          <div className="container-jobscards">
-            <div>
-              <div></div>
-              <div>
-                <span>Kasisto</span>
-                <h2>Front-End Software Engineer</h2>
-                <button>Full time</button>
-              </div>
-              <div>
-                <span>
-                  <i className="material-icons-round">public</i>New York
-                </span>
-                <span>5 days ago</span>
-              </div>
-            </div>
-          </div>
-          <div className="jobs-pagination"></div>
-        </section>
+        {allJobs ? <JobLists data={allJobs} /> : <div></div>}
       </main>
+      <Footer />
     </div>
   );
 }

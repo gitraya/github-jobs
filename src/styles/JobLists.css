@@ -1,0 +1,11 @@
+.jobslist-section {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+}
+.container-jobscards {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0px;
+  row-gap: 1.5rem;
+}
