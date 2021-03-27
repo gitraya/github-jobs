@@ -25,6 +25,7 @@ body {
   padding: 0px;
   border: none;
   background: none;
+  cursor: pointer;
 }
 .App-logo button:focus {
   outline: none !important;

@@ -1,6 +1,8 @@
 import 'styles/JobCard.css';
 
-const JobCard = ({ innerKey, data }) => {
+const JobCard = ({ innerKey, data, jobdesc }) => {
+  const { jobdata, setJobData } = jobdesc;
+
   const checkDate = () => {
     const today = new Date().getDate();
     const created = new Date(data.created_at).getDate();
@@ -17,8 +19,12 @@ const JobCard = ({ innerKey, data }) => {
     }
   };
 
+  const openJobDetails = () => {
+    return setJobData({ id: innerKey, display: !jobdata.display });
+  };
+
   return (
-    <div key={innerKey} className="job-card">
+    <div key={innerKey} className="job-card" onClick={openJobDetails}>
       <div className="card-logo">
         {data.company_logo ? (
           <img src={data.company_logo} alt="company_logo" />

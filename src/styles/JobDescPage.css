@@ -1,0 +1,44 @@
+.jobdesc-aside {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+}
+.jobdesc-main {
+  grid-area: main;
+}
+.back-button button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  background: none;
+  border: none;
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #1e86ff;
+}
+.back-button button i {
+  transform: rotate(180deg);
+  margin-right: 0.9rem;
+}
+.apply-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 0px;
+}
+.apply-container h2 {
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin: 0.4rem 0px;
+  text-transform: uppercase;
+  color: #b9bdcf;
+}
+.apply-container div {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #334680;
+}
+.apply-container div p {
+  margin: 0.4rem 0px;
+}

@@ -3,11 +3,16 @@ import Footer from 'components/Footer';
 import SearchJobs from 'components/SearchJobs';
 import FilterJobs from 'components/FilterJobs';
 import JobLists from 'components/JobLists';
+import JobDescPage from 'components/JobDescPage';
 
 function App() {
   const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
   const [allJobs, setAllJobs] = useState(null);
   const [backupData, setBackupData] = useState(null);
+  const [jobdata, setJobData] = useState({
+    id: '',
+    display: false,
+  });
   const [searchTerms, setSearchTerms] = useState({
     description: '',
     location: '',
@@ -40,6 +45,7 @@ function App() {
       .then((data) => {
         setAllJobs(data);
         setBackupData(data);
+        console.log(data);
       })
       .catch((err) => console.log(err));
   };
@@ -64,18 +70,26 @@ function App() {
           </button>
         </div>
       </header>
-      <main>
-        <SearchJobs
-          sendSearch={jobSearch}
-          searchData={{ searchTerms, setSearchTerms }}
-        />
-        <FilterJobs
-          filterSearch={fulltimeFilter}
-          sendSearch={jobSearch}
-          searchData={{ searchTerms, setSearchTerms }}
-        />
-        {allJobs ? <JobLists data={allJobs} /> : <div></div>}
-      </main>
+      {jobdata.display ? (
+        <JobDescPage id={jobdata.id} data={allJobs} />
+      ) : (
+        <main>
+          <SearchJobs
+            sendSearch={jobSearch}
+            searchData={{ searchTerms, setSearchTerms }}
+          />
+          <FilterJobs
+            filterSearch={fulltimeFilter}
+            sendSearch={jobSearch}
+            searchData={{ searchTerms, setSearchTerms }}
+          />
+          {allJobs ? (
+            <JobLists data={allJobs} jobdata={{ jobdata, setJobData }} />
+          ) : (
+            <div></div>
+          )}
+        </main>
+      )}
       <Footer />
     </div>
   );

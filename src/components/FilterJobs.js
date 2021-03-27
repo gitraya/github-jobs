@@ -4,6 +4,11 @@ import RadioButton from 'components/RadioButton';
 const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
   const { searchTerms, setSearchTerms } = searchData;
 
+  const onValueChange = (e) => {
+    setSearchTerms({ ...searchTerms, location: e.target.value });
+    sendSearch({ ...searchTerms, location: e.target.value });
+  };
+
   const cities = ['London', 'Amsterdam', 'New York', 'Berlin'];
   const filterOptions = cities.map((city, index) => {
     return (
@@ -13,6 +18,9 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
         className="radio-group"
         name="filterlocation"
         label={city}
+        value={city}
+        checked={searchTerms.location === city}
+        onChange={onValueChange}
       />
     );
   });
