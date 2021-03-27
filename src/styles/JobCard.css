@@ -7,6 +7,7 @@
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
+  cursor: pointer;
 }
 .card-logo {
   min-width: 6rem;
@@ -42,20 +43,20 @@
   color: #334680;
 }
 .card-desc .role {
-  font-size: 1.125;
+  font-size: 1.125rem;
   font-weight: 400;
   color: #334680;
   margin: 0.5rem 0px;
 }
 .card-desc .full {
   width: fit-content;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   color: #334680;
   padding: 6px 8px;
   background: none;
   border: 1px solid #334680;
-  box-sizing: border-box;
   border-radius: 4px;
 }
 .card-desc .full:focus {

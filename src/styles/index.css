@@ -31,6 +31,7 @@ body {
   outline: none !important;
 }
 .App-logo button span {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   color: #282538;
 }
@@ -43,11 +44,15 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-columns: 30% 70%;
   grid-template-areas:
     'search search'
     'aside main';
   gap: 1.5rem 2rem;
+}
+
+.jobdesc-container {
+  grid-template-areas: 'aside main';
 }
 
 aside {

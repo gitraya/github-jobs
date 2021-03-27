@@ -9,7 +9,7 @@ function App() {
   const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
   const [allJobs, setAllJobs] = useState(null);
   const [backupData, setBackupData] = useState(null);
-  const [jobdata, setJobData] = useState({
+  const [jobId, setJobId] = useState({
     id: '',
     display: false,
   });
@@ -62,16 +62,13 @@ function App() {
     <div className="App">
       <header>
         <div className="App-logo">
-          <button
-            type="button"
-            onClick={async () => await getData(searchTerms)}
-          >
+          <button type="button">
             <span>Github</span> <span>Jobs</span>
           </button>
         </div>
       </header>
-      {jobdata.display ? (
-        <JobDescPage id={jobdata.id} data={allJobs} />
+      {jobId.display ? (
+        <JobDescPage id={jobId.id} allData={allJobs} pageState={setJobId} />
       ) : (
         <main>
           <SearchJobs
@@ -84,7 +81,7 @@ function App() {
             searchData={{ searchTerms, setSearchTerms }}
           />
           {allJobs ? (
-            <JobLists data={allJobs} jobdata={{ jobdata, setJobData }} />
+            <JobLists data={allJobs} jobId={{ jobId, setJobId }} />
           ) : (
             <div></div>
           )}

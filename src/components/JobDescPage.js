@@ -1,22 +1,26 @@
 import { useRef, useEffect } from 'react';
 import 'styles/JobDescPage.css';
 
-const JobDescPage = ({ id, data }) => {
-  const jobdata = data.filter((data) => data.id === id)[0];
+const JobDescPage = ({ id, allData, pageState }) => {
+  const data = allData.filter((data) => data.id === id)[0];
   const descRef = useRef(null);
   const emailRef = useRef(null);
 
+  const handleClosePage = () => {
+    return pageState({ id: '', display: false });
+  };
+
   useEffect(() => {
-    descRef.current.innerHTML = jobdata.description;
-    emailRef.current.innerHTML = jobdata.how_to_apply;
-  }, [jobdata]);
-  console.log(jobdata);
+    descRef.current.innerHTML = data.description;
+    emailRef.current.innerHTML = data.how_to_apply;
+  }, [data]);
+  console.log(data);
 
   return (
-    <main>
+    <main className="jobdesc-container">
       <aside className="jobdesc-aside">
         <div className="back-button">
-          <button>
+          <button type="submit" onClick={handleClosePage}>
             <i class="material-icons-round">arrow_right_alt</i>Back to search
           </button>
         </div>
@@ -28,7 +32,7 @@ const JobDescPage = ({ id, data }) => {
       <section className="jobdesc-main">
         <div className="jobdesc-title">
           <div className="title">
-            <h2 className="role">{jobdata.title}</h2>
+            <h2 className="role">{data.title}</h2>
             <button className="full">Full time</button>
           </div>
           <span className="jobdesc-created">
@@ -36,12 +40,18 @@ const JobDescPage = ({ id, data }) => {
           </span>
         </div>
         <div className="jobdesc-company">
-          <div className="company-logo"></div>
+          <div className="company-logo">
+            {data.company_logo ? (
+              <img src={data.company_logo} alt="logo" />
+            ) : (
+              <span>not found</span>
+            )}
+          </div>
           <div className="company-text">
-            <span className="company">{jobdata.company}</span>
+            <span className="company">{data.company}</span>
             <span className="location">
               <i className="material-icons-round">public</i>
-              {jobdata.location}
+              {data.location}
             </span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import 'styles/JobCard.css';
 
-const JobCard = ({ innerKey, data, jobdesc }) => {
-  const { jobdata, setJobData } = jobdesc;
+const JobCard = ({ innerKey, data, jobData }) => {
+  const { jobId, setJobId } = jobData;
 
   const checkDate = () => {
     const today = new Date().getDate();
@@ -20,7 +20,7 @@ const JobCard = ({ innerKey, data, jobdesc }) => {
   };
 
   const openJobDetails = () => {
-    return setJobData({ id: innerKey, display: !jobdata.display });
+    return setJobId({ id: innerKey, display: !jobId.display });
   };
 
   return (
