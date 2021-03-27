@@ -43,6 +43,32 @@ function App() {
     return url;
   };
 
+  // retrieve data from GitHub API
+  const getData = async (searchParams) => {
+    setIsLoading(true);
+    await fetch(`${cors_api}${checkUrl(searchParams)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+        setBackupData(data);
+      })
+      .catch((err) => console.log(err));
+    setIsLoading(false);
+  };
+
+  // get user position and get jobs data from github
+  const getPosition = async ({ coords }) => {
+    await fetch(
+      `${cors_api}https://jobs.github.com/positions.json?lat=${coords.latitude}&long=${coords.longitude}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setBackupData(data);
+        setAllData(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   // filter data by full time type
   const fulltimeFilter = () => {
     if (searchParams.isFulltime) {
@@ -52,20 +78,6 @@ function App() {
     }
   };
 
-  // retrieve data from GitHub API
-  const getData = async (searchParams) => {
-    setIsLoading(true);
-    await fetch(`${cors_api}${checkUrl(searchParams)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setAllData(data);
-        setBackupData(data);
-        console.log(data);
-      })
-      .catch((err) => console.log(err));
-    setIsLoading(false);
-  };
-
   // to handle the search
   const sendSearch = (searchParams) => {
     getData(searchParams);
@@ -73,7 +85,15 @@ function App() {
 
   // use effect to get data from API
   useEffect(() => {
-    if (!allData) return getData(searchParams);
+    const getAllData = async () => {
+      if (navigator.geolocation && !allData) {
+        await navigator.geolocation.getCurrentPosition(getPosition);
+      }
+      if (allData && allData.length < 1) {
+        return getData(searchParams);
+      }
+    };
+    getAllData();
   }, [allData, searchParams]);
 
   return (
