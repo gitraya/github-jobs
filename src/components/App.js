@@ -6,82 +6,88 @@ import JobLists from 'components/JobLists';
 import JobDescPage from 'components/JobDescPage';
 
 function App() {
+  // cors api url
   const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
-  const [allJobs, setAllJobs] = useState(null);
+
+  // react state for job application
+  const [allData, setAllData] = useState(null);
   const [backupData, setBackupData] = useState(null);
   const [jobId, setJobId] = useState({
     id: '',
     display: false,
   });
-  const [searchTerms, setSearchTerms] = useState({
+  const [searchParams, setSearchParams] = useState({
     description: '',
     location: '',
     isFulltime: false,
   });
 
-  const checkUrl = (searchTerms) => {
+  // check url
+  const checkUrl = (searchParams) => {
     let url = new URL('https://jobs.github.com/positions.json');
 
     url.search = new URLSearchParams({
-      description: searchTerms.description.toLowerCase(),
-      full_time: `${searchTerms.isFulltime ? 'true' : ''}`,
-      location: searchTerms.location.toLowerCase(),
+      description: searchParams.description.toLowerCase(),
+      full_time: `${searchParams.isFulltime ? 'true' : ''}`,
+      location: searchParams.location.toLowerCase(),
     });
 
     return url;
   };
 
+  // filter data by full time type
   const fulltimeFilter = () => {
-    if (searchTerms.isFulltime) {
-      return setAllJobs(allJobs.filter((data) => data.type === 'Full Time'));
+    if (searchParams.isFulltime) {
+      return setAllData(allData.filter((data) => data.type === 'Full Time'));
     } else {
-      return setAllJobs(backupData);
+      return setAllData(backupData);
     }
   };
 
-  const getData = async (searchTerms) => {
-    await fetch(`${cors_api}${checkUrl(searchTerms)}`)
+  // retrieve data from GitHub API
+  const getData = async (searchParams) => {
+    await fetch(`${cors_api}${checkUrl(searchParams)}`)
       .then((res) => res.json())
       .then((data) => {
-        setAllJobs(data);
+        setAllData(data);
         setBackupData(data);
         console.log(data);
       })
       .catch((err) => console.log(err));
   };
 
-  const jobSearch = (searchTerms) => {
-    getData(searchTerms);
+  // to handle the search
+  const sendSearch = (searchParams) => {
+    getData(searchParams);
   };
 
+  // use effect to get data from API
   useEffect(() => {
-    if (!allJobs) return getData(searchTerms);
-  }, [allJobs, searchTerms]);
+    if (!allData) return getData(searchParams);
+  }, [allData, searchParams]);
 
   return (
     <div className="App">
       <header>
         <div className="App-logo">
-          <button type="button">
-            <span>Github</span> <span>Jobs</span>
-          </button>
+          <span>Github</span> <span>Jobs</span>
         </div>
       </header>
       {jobId.display ? (
-        <JobDescPage id={jobId.id} allData={allJobs} pageState={setJobId} />
+        <JobDescPage id={jobId.id} allData={allData} pageState={setJobId} />
       ) : (
         <main>
           <SearchJobs
-            sendSearch={jobSearch}
-            searchData={{ searchTerms, setSearchTerms }}
+            sendSearch={sendSearch}
+            searchData={{ searchParams, setSearchParams }}
           />
           <FilterJobs
             filterSearch={fulltimeFilter}
-            sendSearch={jobSearch}
-            searchData={{ searchTerms, setSearchTerms }}
+            sendSearch={sendSearch}
+            searchData={{ searchParams, setSearchParams }}
           />
-          {allJobs ? (
-            <JobLists data={allJobs} jobId={{ jobId, setJobId }} />
+          {allData ? (
+            <JobLists data={allData} jobId={{ jobId, setJobId }} />
           ) : (
             <div></div>
           )}

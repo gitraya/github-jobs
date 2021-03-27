@@ -1,29 +1,33 @@
 import 'styles/SearchJobs.css';
 
 const SearchJobs = ({ sendSearch, searchData }) => {
-  const { searchTerms, setSearchTerms } = searchData;
+  const { searchParams, setSearchParams } = searchData;
 
-  const handleJobSearches = (e) => {
+  // handle job searches
+  const handleSearches = (e) => {
     e.preventDefault();
-    sendSearch(searchTerms);
-    setSearchTerms({ ...searchTerms, description: '', location: '' });
+    sendSearch(searchParams);
+    setSearchParams({ ...searchParams, description: '', location: '' });
   };
 
   return (
     <section className="search-section">
       <div className="search-box">
-        <form onSubmit={handleJobSearches}>
+        <form onSubmit={handleSearches}>
           <div className="input-control search">
             <i class="material-icons-round">work_outline</i>
             <input
-              value={searchTerms.description}
+              value={searchParams.description}
               className="input-search"
               id="search"
               name="search"
               type="text"
               placeholder="Title, companies, expertise or benefits"
               onChange={(e) =>
-                setSearchTerms({ ...searchTerms, description: e.target.value })
+                setSearchParams({
+                  ...searchParams,
+                  description: e.target.value,
+                })
               }
             />
             <input className="submit-search" type="submit" value="Search" />

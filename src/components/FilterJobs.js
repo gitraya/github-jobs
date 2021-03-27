@@ -2,13 +2,15 @@ import 'styles/FilterJobs.css';
 import RadioButton from 'components/RadioButton';
 
 const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
-  const { searchTerms, setSearchTerms } = searchData;
+  const { searchParams, setSearchParams } = searchData;
 
+  // handle value changes
   const onValueChange = (e) => {
-    setSearchTerms({ ...searchTerms, location: e.target.value });
-    sendSearch({ ...searchTerms, location: e.target.value });
+    setSearchParams({ ...searchParams, location: e.target.value });
+    sendSearch({ ...searchParams, location: e.target.value });
   };
 
+  // location filter options
   const cities = ['London', 'Amsterdam', 'New York', 'Berlin'];
   const filterOptions = cities.map((city, index) => {
     return (
@@ -19,16 +21,17 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
         name="filterlocation"
         label={city}
         value={city}
-        checked={searchTerms.location === city}
+        checked={searchParams.location === city}
         onChange={onValueChange}
       />
     );
   });
 
-  const handleJobSearches = (e, searchTerms) => {
+  // handle job searches
+  const handleSearches = (e, searchParams) => {
     e.preventDefault();
-    sendSearch(searchTerms);
-    setSearchTerms({ ...searchTerms, description: '', location: '' });
+    sendSearch(searchParams);
+    setSearchParams({ ...searchParams, description: '', location: '' });
   };
 
   return (
@@ -36,11 +39,11 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
       <div className="filter-fulltime">
         <form>
           <input
-            defaultChecked={searchTerms.isFulltime}
+            defaultChecked={searchParams.isFulltime}
             onChange={() => {
-              setSearchTerms({
-                ...searchTerms,
-                isFulltime: !searchTerms.isFulltime,
+              setSearchParams({
+                ...searchParams,
+                isFulltime: !searchParams.isFulltime,
               });
               filterSearch();
             }}
@@ -52,14 +55,14 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
         </form>
       </div>
       <div className="search-location">
-        <form onSubmit={(e) => handleJobSearches(e, searchTerms)}>
+        <form onSubmit={(e) => handleSearches(e, searchParams)}>
           <label htmlFor="location">location</label>
           <div className="input-control location">
             <i className="material-icons-round">public</i>
             <input
-              value={searchTerms.location}
+              value={searchParams.location}
               onChange={(e) =>
-                setSearchTerms({ ...searchTerms, location: e.target.value })
+                setSearchParams({ ...searchParams, location: e.target.value })
               }
               id="location"
               name="location"

@@ -1,23 +1,8 @@
 import 'styles/JobCard.css';
+import { checkDate } from 'helpers/helpers';
 
-const JobCard = ({ innerKey, data, jobData }) => {
-  const { jobId, setJobId } = jobData;
-
-  const checkDate = () => {
-    const today = new Date().getDate();
-    const created = new Date(data.created_at).getDate();
-
-    if (created < today) {
-      let day = today - created;
-      if (day > 1) {
-        return `${day} days ago`;
-      } else {
-        return 'yesterday';
-      }
-    } else if (created === today) {
-      return 'today';
-    }
-  };
+const JobCard = ({ innerKey, data, id }) => {
+  const { jobId, setJobId } = id;
 
   const openJobDetails = () => {
     return setJobId({ id: innerKey, display: !jobId.display });
@@ -48,7 +33,7 @@ const JobCard = ({ innerKey, data, jobData }) => {
         </span>
         <span>
           <i class="material-icons-round">query_builder</i>
-          {checkDate()}
+          {checkDate(data.created_at)}
         </span>
       </div>
     </div>

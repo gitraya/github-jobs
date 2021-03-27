@@ -2,19 +2,23 @@ import { useRef, useEffect } from 'react';
 import 'styles/JobDescPage.css';
 
 const JobDescPage = ({ id, allData, pageState }) => {
+  // filtering data
   const data = allData.filter((data) => data.id === id)[0];
+
+  // element reference
   const descRef = useRef(null);
   const emailRef = useRef(null);
 
+  // handle closing the page
   const handleClosePage = () => {
     return pageState({ id: '', display: false });
   };
 
+  // uses effects to send data to an element
   useEffect(() => {
     descRef.current.innerHTML = data.description;
     emailRef.current.innerHTML = data.how_to_apply;
   }, [data]);
-  console.log(data);
 
   return (
     <main className="jobdesc-container">

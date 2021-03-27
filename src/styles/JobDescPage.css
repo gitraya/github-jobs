@@ -63,6 +63,7 @@
   margin-bottom: 0.5rem;
 }
 .jobdesc-title .title .role {
+  max-width: 80%;
   margin: 0px;
   font-size: 1.5rem;
   font-weight: 700;
