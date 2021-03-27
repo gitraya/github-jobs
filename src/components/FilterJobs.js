@@ -30,6 +30,7 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
   // handle job searches
   const handleSearches = (e, searchParams) => {
     e.preventDefault();
+    if (!searchParams.location) return;
     sendSearch(searchParams);
     setSearchParams({ ...searchParams, description: '', location: '' });
   };

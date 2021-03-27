@@ -6,6 +6,7 @@ const SearchJobs = ({ sendSearch, searchData }) => {
   // handle job searches
   const handleSearches = (e) => {
     e.preventDefault();
+    if (!searchParams.description) return;
     sendSearch(searchParams);
     setSearchParams({ ...searchParams, description: '', location: '' });
   };

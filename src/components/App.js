@@ -4,10 +4,18 @@ import SearchJobs from 'components/SearchJobs';
 import FilterJobs from 'components/FilterJobs';
 import JobLists from 'components/JobLists';
 import JobDescPage from 'components/JobDescPage';
+import { useLoading, ThreeDots } from '@agney/react-loading';
 
 function App() {
   // cors api url
   const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
+
+  // react state for loading indicator
+  const [isLoading, setIsLoading] = useState(false);
+  const { containerProps, indicatorEl } = useLoading({
+    loading: true,
+    indicator: <ThreeDots width="50" />,
+  });
 
   // react state for job application
   const [allData, setAllData] = useState(null);
@@ -46,6 +54,7 @@ function App() {
 
   // retrieve data from GitHub API
   const getData = async (searchParams) => {
+    setIsLoading(true);
     await fetch(`${cors_api}${checkUrl(searchParams)}`)
       .then((res) => res.json())
       .then((data) => {
@@ -54,6 +63,7 @@ function App() {
         console.log(data);
       })
       .catch((err) => console.log(err));
+    setIsLoading(false);
   };
 
   // to handle the search
@@ -86,7 +96,13 @@ function App() {
             sendSearch={sendSearch}
             searchData={{ searchParams, setSearchParams }}
           />
-          {allData ? (
+          {isLoading ? (
+            <div className="load-animation" {...containerProps}>
+              {indicatorEl}
+            </div>
+          ) : allData && allData.length < 1 ? (
+            <div className="not-found">No results found</div>
+          ) : allData ? (
             <JobLists data={allData} jobId={{ jobId, setJobId }} />
           ) : (
             <div></div>

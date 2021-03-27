@@ -18,6 +18,20 @@ body {
   background: #f6f7fb;
 }
 
+.load-animation {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  color: #334680;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0px;
+  color: #334680;
+}
+
 /* logo style */
 .app-logo {
   margin: 2rem 0px;

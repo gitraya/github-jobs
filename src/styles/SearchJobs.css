@@ -44,6 +44,10 @@
   font-size: 0.75rem;
   color: #b9bdcf;
 }
+.input-search:focus {
+  outline: none !important;
+  border-color: #334680;
+}
 /* button submit style */
 .submit-search {
   position: absolute;
@@ -57,4 +61,13 @@
   background: #1e86ff;
   border-radius: 4px;
   padding: 14px 48px;
+  cursor: pointer;
+}
+.submit-search:hover,
+.submit-search:focus {
+  color: #1e86ff;
+  background: #fff;
+}
+.submit-search:focus {
+  outline: none !important;
 }

@@ -81,3 +81,6 @@
   font-weight: 500;
   color: #b7bcce;
 }
+.card__time span i {
+  font-size: 1rem;
+}
