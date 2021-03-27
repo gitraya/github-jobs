@@ -21,45 +21,45 @@ const JobDescPage = ({ id, allData, pageState }) => {
   }, [data]);
 
   return (
-    <main className="jobdesc-container">
-      <aside className="jobdesc-aside">
+    <main className="main-container">
+      <aside className="aside">
         <div className="back-button">
           <button type="submit" onClick={handleClosePage}>
             <i class="material-icons-round">arrow_right_alt</i>Back to search
           </button>
         </div>
-        <div className="apply-container">
+        <div className="aside-email">
           <h2>how to apply</h2>
-          <div ref={emailRef} className="apply-text"></div>
+          <div ref={emailRef} className="email-wrapper"></div>
         </div>
       </aside>
-      <section className="jobdesc-main">
-        <div className="jobdesc-title">
-          <div className="title">
-            <h2 className="role">{data.title}</h2>
-            <button className="full">Full time</button>
+      <section className="detail-section">
+        <div className="detail__title">
+          <div className="title-wrapper">
+            <h2 className="title">{data.title}</h2>
+            <button className="fulltime">Full time</button>
           </div>
-          <span className="jobdesc-created">
+          <span className="created">
             <i class="material-icons-round">query_builder</i>5 days ago
           </span>
         </div>
-        <div className="jobdesc-company">
-          <div className="company-logo">
+        <div className="detail__company">
+          <div className="logo">
             {data.company_logo ? (
               <img src={data.company_logo} alt="logo" />
             ) : (
               <span>not found</span>
             )}
           </div>
-          <div className="company-text">
-            <span className="company">{data.company}</span>
+          <div className="company-wrapper">
+            <span className="name">{data.company}</span>
             <span className="location">
               <i className="material-icons-round">public</i>
               {data.location}
             </span>
           </div>
         </div>
-        <div ref={descRef} className="jobdesc-content"></div>
+        <div ref={descRef} className="detail__description"></div>
       </section>
     </main>
   );

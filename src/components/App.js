@@ -69,7 +69,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <div className="App-logo">
+        <div className="app-logo">
           <span>Github</span> <span>Jobs</span>
         </div>
       </header>

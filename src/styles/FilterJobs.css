@@ -1,14 +1,17 @@
-.filterjobs-section {
+/* filter section style */
+.filter-section {
   grid-area: aside;
   display: flex;
   flex-direction: column;
 }
-.filter-fulltime form {
+
+/* filter fulltime style */
+.filter__fulltime form {
   height: 3rem;
   display: flex;
   align-items: center;
 }
-.filter-fulltime form input {
+.filter__fulltime form input {
   width: 18px;
   height: 18px;
   margin: 0px 10px 0px 12px;
@@ -16,18 +19,20 @@
   box-sizing: border-box;
   border-radius: 2px;
 }
-.filter-fulltime form label {
+.filter__fulltime form label {
   font-size: 0.875rem;
   color: #334680;
   font-weight: 500;
   cursor: pointer;
 }
-.search-location {
+
+/* search location style */
+.filter__search-location {
   padding: 0.5rem 0px;
   display: flex;
   flex-direction: column;
 }
-.search-location label {
+.filter__search-location label {
   font-size: 0.875rem;
   font-weight: 700;
   color: #b9bdcf;
@@ -58,10 +63,11 @@
   color: #b9bdcf;
 }
 
-.filter-location {
+/* filter location style */
+.filter__location {
   padding: 1rem 0px;
 }
-.filter-location form {
+.filter__location form {
   display: flex;
   flex-direction: column;
   row-gap: 0.75rem;

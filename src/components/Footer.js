@@ -2,7 +2,7 @@ import 'styles/Footer.css';
 
 const Footer = () => {
   return (
-    <footer className="App-footer">
+    <footer className="app-footer">
       <small className="copyright">
         {`created by `}
         <b>

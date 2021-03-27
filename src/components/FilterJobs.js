@@ -35,8 +35,8 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
   };
 
   return (
-    <aside className="filterjobs-section">
-      <div className="filter-fulltime">
+    <aside className="filter-section">
+      <div className="filter__fulltime">
         <form>
           <input
             defaultChecked={searchParams.isFulltime}
@@ -54,7 +54,7 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
           <label htmlFor="fulltime">Full time</label>
         </form>
       </div>
-      <div className="search-location">
+      <div className="filter__search-location">
         <form onSubmit={(e) => handleSearches(e, searchParams)}>
           <label htmlFor="location">location</label>
           <div className="input-control location">
@@ -72,7 +72,7 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
           </div>
         </form>
       </div>
-      <div className="filter-location">
+      <div className="filter__location">
         <form action="">{filterOptions}</form>
       </div>
     </aside>

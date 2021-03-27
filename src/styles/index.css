@@ -18,20 +18,22 @@ body {
   background: #f6f7fb;
 }
 
-.App-logo {
+/* logo style */
+.app-logo {
   margin: 2rem 0px;
 }
-.App-logo span {
+.app-logo span {
   font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   color: #282538;
 }
-.App-logo span:nth-of-type(1) {
+.app-logo span:nth-of-type(1) {
   font-weight: 700;
 }
-.App-logo span:nth-of-type(2) {
+.app-logo span:nth-of-type(2) {
   font-weight: 300;
 }
+/* logo style */
 
 main {
   display: grid;
@@ -40,10 +42,6 @@ main {
     'search search'
     'aside main';
   gap: 1.5rem 2rem;
-}
-
-.jobdesc-container {
-  grid-template-areas: 'aside main';
 }
 
 aside {
