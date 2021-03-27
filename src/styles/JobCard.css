@@ -58,6 +58,9 @@
   box-sizing: border-box;
   border-radius: 4px;
 }
+.card-desc .full:focus {
+  outline: none !important;
+}
 .card-time {
   position: absolute;
   display: flex;

@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import 'styles/SearchJobs.css';
 
-const SearchJobs = ({ sendSearch }) => {
-  const [description, setDescription] = useState('');
+const SearchJobs = ({ sendSearch, searchData }) => {
+  const { searchTerms, setSearchTerms } = searchData;
+
   const handleJobSearches = (e) => {
     e.preventDefault();
-    sendSearch(description);
-    setDescription('');
+    sendSearch(searchTerms);
+    setSearchTerms({ ...searchTerms, description: '' });
   };
 
   return (
@@ -16,13 +16,15 @@ const SearchJobs = ({ sendSearch }) => {
           <div className="input-control search">
             <i class="material-icons-round">work_outline</i>
             <input
-              value={description}
+              value={searchTerms.description}
               className="input-search"
               id="search"
               name="search"
               type="text"
               placeholder="Title, companies, expertise or benefits"
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) =>
+                setSearchTerms({ ...searchTerms, description: e.target.value })
+              }
             />
             <input className="submit-search" type="submit" value="Search" />
           </div>
