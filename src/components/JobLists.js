@@ -8,9 +8,9 @@ const JobLists = ({ data, jobId }) => {
   });
 
   return (
-    <section className="jobslist-section">
-      <div className="container-jobscards">{renderJobCard}</div>
-      <div className="jobs-pagination"></div>
+    <section className="list-section">
+      <div className="list__cards">{renderJobCard}</div>
+      <div className="list__pagination"></div>
     </section>
   );
 };

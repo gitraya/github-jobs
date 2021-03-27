@@ -9,24 +9,24 @@ const JobCard = ({ innerKey, data, id }) => {
   };
 
   return (
-    <div key={innerKey} className="job-card" onClick={openJobDetails}>
-      <div className="card-logo">
+    <div key={innerKey} className="card-container" onClick={openJobDetails}>
+      <div className="card__logo">
         {data.company_logo ? (
-          <img src={data.company_logo} alt="company_logo" />
+          <img src={data.company_logo} alt="logo" />
         ) : (
           <span>not found</span>
         )}
       </div>
-      <div className="card-desc">
-        <span className="company">{data.company}</span>
-        <h2 className="role">{data.title}</h2>
+      <div className="card__title">
+        <span className="name">{data.company}</span>
+        <h2 className="title">{data.title}</h2>
         {data.type === 'Full Time' ? (
-          <button className="full">Full time</button>
+          <button className="fulltime">Full time</button>
         ) : (
           ''
         )}
       </div>
-      <div className="card-time">
+      <div className="card__time">
         <span>
           <i className="material-icons-round">public</i>
           {data.location}

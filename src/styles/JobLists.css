@@ -1,9 +1,9 @@
-.jobslist-section {
+.list-section {
   grid-area: main;
   display: flex;
   flex-direction: column;
 }
-.container-jobscards {
+.list__cards {
   display: flex;
   flex-direction: column;
   padding: 1rem 0px;
