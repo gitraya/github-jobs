@@ -7,6 +7,7 @@ import JobLists from 'components/JobLists';
 function App() {
   const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
   const [allJobs, setAllJobs] = useState(null);
+  const [backupData, setBackupData] = useState(null);
   const [searchTerms, setSearchTerms] = useState({
     description: '',
     location: '',
@@ -25,16 +26,20 @@ function App() {
     return url;
   };
 
+  const fulltimeFilter = () => {
+    if (searchTerms.isFulltime) {
+      return setAllJobs(allJobs.filter((data) => data.type === 'Full Time'));
+    } else {
+      return setAllJobs(backupData);
+    }
+  };
+
   const getData = async (searchTerms) => {
     await fetch(`${cors_api}${checkUrl(searchTerms)}`)
       .then((res) => res.json())
       .then((data) => {
         setAllJobs(data);
-        console.log(
-          data.map((da) => {
-            return da.type;
-          })
-        );
+        setBackupData(data);
       })
       .catch((err) => console.log(err));
   };
@@ -45,7 +50,7 @@ function App() {
 
   useEffect(() => {
     if (!allJobs) return getData(searchTerms);
-  }, [allJobs]);
+  }, [allJobs, searchTerms]);
 
   return (
     <div className="App">
@@ -65,6 +70,7 @@ function App() {
           searchData={{ searchTerms, setSearchTerms }}
         />
         <FilterJobs
+          filterSearch={fulltimeFilter}
           sendSearch={jobSearch}
           searchData={{ searchTerms, setSearchTerms }}
         />

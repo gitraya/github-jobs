@@ -6,7 +6,7 @@ const SearchJobs = ({ sendSearch, searchData }) => {
   const handleJobSearches = (e) => {
     e.preventDefault();
     sendSearch(searchTerms);
-    setSearchTerms({ ...searchTerms, description: '' });
+    setSearchTerms({ ...searchTerms, description: '', location: '' });
   };
 
   return (

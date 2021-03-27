@@ -1,7 +1,7 @@
 import 'styles/FilterJobs.css';
 import RadioButton from 'components/RadioButton';
 
-const FilterJobs = ({ sendSearch, searchData }) => {
+const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
   const { searchTerms, setSearchTerms } = searchData;
 
   const cities = ['London', 'Amsterdam', 'New York', 'Berlin'];
@@ -20,7 +20,7 @@ const FilterJobs = ({ sendSearch, searchData }) => {
   const handleJobSearches = (e, searchTerms) => {
     e.preventDefault();
     sendSearch(searchTerms);
-    setSearchTerms({ ...searchTerms, location: '' });
+    setSearchTerms({ ...searchTerms, description: '', location: '' });
   };
 
   return (
@@ -29,12 +29,13 @@ const FilterJobs = ({ sendSearch, searchData }) => {
         <form>
           <input
             defaultChecked={searchTerms.isFulltime}
-            onChange={() =>
+            onChange={() => {
               setSearchTerms({
                 ...searchTerms,
                 isFulltime: !searchTerms.isFulltime,
-              })
-            }
+              });
+              filterSearch();
+            }}
             id="fulltime"
             name="fulltime"
             type="checkbox"
