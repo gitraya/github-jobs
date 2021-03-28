@@ -27,7 +27,7 @@ const RadioButton = ({
 RadioButton.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,

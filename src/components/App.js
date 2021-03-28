@@ -51,8 +51,8 @@ function App() {
     await fetch(`${cors_api}${checkUrl(searchParams)}`)
       .then((res) => res.json())
       .then((data) => {
-        setAllData(data);
         setBackupData(data);
+        setAllData(data);
       })
       .catch((err) => console.log(err));
     setIsLoading(false);
@@ -73,6 +73,7 @@ function App() {
       .then((data) => {
         setBackupData(data);
         setAllData(data);
+        if (data.length < 1) setIsLoading(true);
       })
       .catch((err) => console.log(err));
   };
@@ -103,6 +104,7 @@ function App() {
     };
     getAllData();
   });
+  console.log(allData);
 
   return (
     <div className="App">
