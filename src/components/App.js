@@ -98,6 +98,7 @@ function App() {
       if (navigator.geolocation && !allData) {
         await getUserLocation();
         if ((allData && allData.length < 1) || !allData) {
+          setIsLoading(true);
           return getData(searchParams);
         }
       }
