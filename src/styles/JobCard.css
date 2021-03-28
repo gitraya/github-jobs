@@ -89,8 +89,8 @@
 @media screen and (max-width: 960px) {
   .card-container {
     display: grid;
-    grid-template-rows: 1fr 0.2fr;
-    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 8fr 2fr;
+    grid-template-columns: 2fr 8fr;
     grid-template-areas:
       'a b'
       'c c';
@@ -107,5 +107,22 @@
     position: unset;
     grid-area: c;
     justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .card__time span {
+    word-break: break-all;
+  }
+  .card__logo {
+    min-width: 5rem;
+    max-width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card-container {
+    grid-template-columns: 2fr 8fr;
   }
 }

@@ -95,7 +95,7 @@
   .filter-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 0.2 1fr;
+    grid-template-rows: 0.2fr 0.8fr;
     grid-template-areas:
       'a c'
       'b c';
@@ -109,6 +109,23 @@
   }
   .filter__location {
     grid-area: c;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .filter-section {
+    display: flex;
+    grid-template-columns: none;
+    grid-template-rows: none;
+    grid-template-areas: none;
+    gap: unset;
+  }
+  .filter__fulltime,
+  .filter__search-location {
+    grid-area: unset;
+  }
+  .filter__location {
+    grid-area: unset;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;

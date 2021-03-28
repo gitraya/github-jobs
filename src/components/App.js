@@ -89,12 +89,12 @@ function App() {
       if (navigator.geolocation && !allData) {
         await navigator.geolocation.getCurrentPosition(getPosition);
       }
-      if (allData && allData.length < 1) {
+      if ((allData && allData.length < 1) || !allData) {
         return getData(searchParams);
       }
     };
     getAllData();
-  }, [allData, searchParams]);
+  });
 
   return (
     <div className="App">

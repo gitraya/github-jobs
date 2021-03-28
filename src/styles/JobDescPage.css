@@ -166,3 +166,22 @@
 .detail__description {
   color: #334680;
 }
+
+@media screen and (max-width: 540px) {
+  .main-container {
+    flex-direction: column;
+  }
+  .aside,
+  .detail-section {
+    width: 100%;
+  }
+  .title-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .title-wrapper .title {
+    max-width: 100%;
+  }
+}

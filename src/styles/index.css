@@ -31,6 +31,7 @@ body {
 }
 
 .load-animation {
+  grid-area: main;
   display: flex;
   justify-content: center;
   margin: auto;
@@ -93,6 +94,19 @@ main {
       'search search'
       'aside aside'
       'main main';
+    gap: 0.75rem;
+  }
+  .load-animation {
+    margin: 2.5rem auto;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .app-logo {
+    margin-top: 1rem;
+  }
+  main {
+    gap: 0.25rem;
   }
 }
 

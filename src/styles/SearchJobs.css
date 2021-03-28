@@ -81,7 +81,22 @@
   .search-box form {
     width: 90%;
   }
+  .input-search {
+    padding: 20px 124px 20px 40px;
+  }
   .submit-search {
     padding: 14px 24px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search-box form {
+    width: 95%;
+  }
+  .input-search {
+    padding: 20px 114px 20px 40px;
+  }
+  .submit-search {
+    padding: 14px 18px;
   }
 }
