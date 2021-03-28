@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import 'styles/JobCard.css';
 import { checkDate } from 'helpers/helpers';
 
@@ -38,6 +39,12 @@ const JobCard = ({ innerKey, data, id }) => {
       </div>
     </div>
   );
+};
+
+JobCard.propTypes = {
+  innerKey: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  id: PropTypes.object.isRequired,
 };
 
 export default JobCard;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import 'styles/FilterJobs.css';
 import RadioButton from 'components/RadioButton';
 
@@ -78,6 +79,12 @@ const FilterJobs = ({ filterSearch, sendSearch, searchData }) => {
       </div>
     </aside>
   );
+};
+
+FilterJobs.propTypes = {
+  filterSearch: PropTypes.func.isRequired,
+  sendSearch: PropTypes.func.isRequired,
+  searchData: PropTypes.object.isRequired,
 };
 
 export default FilterJobs;

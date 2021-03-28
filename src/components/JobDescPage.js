@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import 'styles/JobDescPage.css';
 
 const JobDescPage = ({ id, allData, pageState }) => {
@@ -63,6 +64,12 @@ const JobDescPage = ({ id, allData, pageState }) => {
       </section>
     </main>
   );
+};
+
+JobDescPage.propTypes = {
+  id: PropTypes.string.isRequired,
+  allData: PropTypes.array.isRequired,
+  pageState: PropTypes.func.isRequired,
 };
 
 export default JobDescPage;

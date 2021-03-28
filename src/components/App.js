@@ -28,6 +28,7 @@ function App() {
     description: '',
     location: '',
     isFulltime: false,
+    page: 0,
   });
 
   // check url
@@ -35,6 +36,7 @@ function App() {
     let url = new URL('https://jobs.github.com/positions.json');
 
     url.search = new URLSearchParams({
+      page: Number(searchParams.page),
       description: searchParams.description.toLowerCase(),
       full_time: `${searchParams.isFulltime ? 'true' : ''}`,
       location: searchParams.location.toLowerCase(),
@@ -54,6 +56,12 @@ function App() {
       })
       .catch((err) => console.log(err));
     setIsLoading(false);
+  };
+
+  // get user location
+  const getUserLocation = async () => {
+    await navigator.geolocation.getCurrentPosition(getPosition);
+    return;
   };
 
   // get user position and get jobs data from github
@@ -87,10 +95,10 @@ function App() {
   useEffect(() => {
     const getAllData = async () => {
       if (navigator.geolocation && !allData) {
-        await navigator.geolocation.getCurrentPosition(getPosition);
-      }
-      if ((allData && allData.length < 1) || !allData) {
-        return getData(searchParams);
+        await getUserLocation();
+        if ((allData && allData.length < 1) || !allData) {
+          return getData(searchParams);
+        }
       }
     };
     getAllData();

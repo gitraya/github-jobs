@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import 'styles/SearchJobs.css';
 
 const SearchJobs = ({ sendSearch, searchData }) => {
@@ -37,6 +38,11 @@ const SearchJobs = ({ sendSearch, searchData }) => {
       </div>
     </section>
   );
+};
+
+SearchJobs.propTypes = {
+  sendSearch: PropTypes.func.isRequired,
+  searchData: PropTypes.object.isRequired,
 };
 
 export default SearchJobs;
