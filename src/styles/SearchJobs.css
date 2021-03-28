@@ -17,6 +17,11 @@
 .search-box form {
   width: 70%;
 }
+@media screen and (max-width: 768px) {
+  .search-box form {
+    width: 85%;
+  }
+}
 /* input style */
 .input-control {
   display: flex;
@@ -70,4 +75,13 @@
 }
 .submit-search:focus {
   outline: none !important;
+}
+
+@media screen and (max-width: 540px) {
+  .search-box form {
+    width: 90%;
+  }
+  .submit-search {
+    padding: 14px 24px;
+  }
 }

@@ -1,9 +1,13 @@
 .main-container {
-  grid-template-areas: 'aside main';
+  grid-template-areas: none;
+  grid-template-columns: none;
+  display: flex;
+  flex-direction: row;
 }
 /* aside style */
 .aside {
-  grid-area: aside;
+  width: 30%;
+  /* grid-area: aside; */
   display: flex;
   flex-direction: column;
 }
@@ -64,13 +68,14 @@
   flex-direction: column;
   margin: 0.4rem 0px;
 }
-.aside-email .email-wrapper p a {
-  word-wrap: break-word;
+.aside-email #email > p > a {
+  word-wrap: break-word !important;
 }
 
 /* detail section style */
 .detail-section {
-  grid-area: main;
+  /* grid-area: main; */
+  width: 70%;
 }
 /* detail title style */
 .detail__title {
@@ -143,8 +148,8 @@
   font-weight: 500;
   color: #bdbdbd;
   display: flex;
+  text-align: center;
   align-items: center;
-  justify-content: center;
   background: #f2f2f2;
 }
 .company-wrapper {

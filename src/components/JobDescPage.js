@@ -30,7 +30,7 @@ const JobDescPage = ({ id, allData, pageState }) => {
         </div>
         <div className="aside-email">
           <h2>how to apply</h2>
-          <div ref={emailRef} className="email-wrapper"></div>
+          <div id="email" ref={emailRef} className="email-wrapper"></div>
         </div>
       </aside>
       <section className="detail-section">

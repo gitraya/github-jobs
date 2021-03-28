@@ -18,6 +18,18 @@ body {
   background: #f6f7fb;
 }
 
+@media screen and (min-width: 1800px) {
+  .App {
+    padding: 0px 15%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .App {
+    padding: 0px 5%;
+  }
+}
+
 .load-animation {
   display: flex;
   justify-content: center;
@@ -51,11 +63,37 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 3fr 7fr;
   grid-template-areas:
     'search search'
     'aside main';
   gap: 1.5rem 2rem;
+}
+@media screen and (max-width: 850px) {
+  main {
+    gap: 1.5rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  main {
+    grid-template-columns: 3.5fr 6.5fr;
+  }
+}
+@media screen and (max-width: 700px) {
+  .App {
+    padding: 0px 3%;
+  }
+  main {
+    grid-template-columns: 3fr 7fr;
+  }
+}
+@media screen and (max-width: 640px) {
+  main {
+    grid-template-areas:
+      'search search'
+      'aside aside'
+      'main main';
+  }
 }
 
 aside {

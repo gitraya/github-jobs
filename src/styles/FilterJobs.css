@@ -90,3 +90,27 @@
   color: #334680;
   cursor: pointer;
 }
+
+@media screen and (max-width: 640px) {
+  .filter-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.2 1fr;
+    grid-template-areas:
+      'a c'
+      'b c';
+    gap: 0px 1rem;
+  }
+  .filter__fulltime {
+    grid-area: a;
+  }
+  .filter__search-location {
+    grid-area: b;
+  }
+  .filter__location {
+    grid-area: c;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+  }
+}
