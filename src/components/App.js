@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Footer from 'components/Footer';
 import SearchJobs from 'components/SearchJobs';
 import FilterJobs from 'components/FilterJobs';
@@ -20,6 +20,8 @@ function App() {
   // react state for job application
   const [allData, setAllData] = useState(null);
   const [backupData, setBackupData] = useState(null);
+  const [dataPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   const [jobId, setJobId] = useState({
     id: '',
     display: false,
@@ -28,7 +30,7 @@ function App() {
     description: '',
     location: '',
     isFulltime: false,
-    page: 0,
+    page: 1,
   });
 
   // check url
@@ -59,10 +61,8 @@ function App() {
   };
 
   // get user location
-  const getUserLocation = async () => {
+  const getUserLocation = async () =>
     await navigator.geolocation.getCurrentPosition(getPosition);
-    return;
-  };
 
   // get user position and get jobs data from github
   const getPosition = async ({ coords }) => {
@@ -79,8 +79,8 @@ function App() {
   };
 
   // filter data by full time type
-  const fulltimeFilter = () => {
-    if (searchParams.isFulltime) {
+  const fulltimeFilter = (isFulltime) => {
+    if (isFulltime) {
       return setAllData(allData.filter((data) => data.type === 'Full Time'));
     } else {
       return setAllData(backupData);
@@ -88,8 +88,18 @@ function App() {
   };
 
   // to handle the search
+  const inputLocationRef = useRef(null);
   const sendSearch = (searchParams) => {
+    setCurrentPage(1);
     getData(searchParams);
+  };
+
+  // change the page number
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginateAllData = (number) => {
+    setSearchParams({ ...searchParams, page: number });
+    setCurrentPage(1);
+    getData({ ...searchParams, page: number });
   };
 
   // use effect to get data from API
@@ -105,7 +115,14 @@ function App() {
     };
     getAllData();
   });
-  console.log(allData);
+
+  // get current data
+  let currentData;
+  if (allData) {
+    const indexLast = currentPage * dataPerPage;
+    const indexFirst = indexLast - dataPerPage;
+    currentData = allData.slice(indexFirst, indexLast);
+  }
 
   return (
     <div className="App">
@@ -121,8 +138,10 @@ function App() {
           <SearchJobs
             sendSearch={sendSearch}
             searchData={{ searchParams, setSearchParams }}
+            forwardedRef={inputLocationRef}
           />
           <FilterJobs
+            ref={inputLocationRef}
             filterSearch={fulltimeFilter}
             sendSearch={sendSearch}
             searchData={{ searchParams, setSearchParams }}
@@ -133,8 +152,19 @@ function App() {
             </div>
           ) : allData && allData.length < 1 ? (
             <div className="not-found">No results found</div>
-          ) : allData ? (
-            <JobLists data={allData} jobId={{ jobId, setJobId }} />
+          ) : currentData ? (
+            <JobLists
+              data={currentData}
+              jobId={{ jobId, setJobId }}
+              pagination={{
+                currentPage,
+                dataPerPage,
+                backupData,
+                paginate,
+                searchParams,
+                paginateAllData,
+              }}
+            />
           ) : (
             <div></div>
           )}

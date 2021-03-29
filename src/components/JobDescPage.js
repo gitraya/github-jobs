@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import 'styles/JobDescPage.css';
+import { checkDate } from 'helpers/helpers';
 
 const JobDescPage = ({ id, allData, pageState }) => {
   // filtering data
@@ -41,7 +42,8 @@ const JobDescPage = ({ id, allData, pageState }) => {
             <button className="fulltime">Full time</button>
           </div>
           <span className="created">
-            <i class="material-icons-round">query_builder</i>5 days ago
+            <i class="material-icons-round">query_builder</i>
+            {checkDate(data.created_at)}
           </span>
         </div>
         <div className="detail__company">
