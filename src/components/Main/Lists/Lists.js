@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
-import 'styles/JobLists.css';
-import JobCard from 'components/JobCard';
-import Pagination from 'components/Pagination';
+import 'components/Main/Lists/Lists.css';
+import Card from 'components/Main/Card/Card';
+import Pagination from 'components/Main/Pagination/Pagination';
 
-const JobLists = ({ data, jobId, pagination }) => {
+const Lists = ({ data, jobId, pagination }) => {
   // component card rendering
-  const renderJobCard = data.map((job) => {
-    return <JobCard key={job.id} innerKey={job.id} data={job} id={jobId} />;
+  const renderCard = data.map((job) => {
+    return <Card key={job.id} innerKey={job.id} data={job} id={jobId} />;
   });
 
   return (
     <section className="list-section">
-      <div className="list__cards">{renderJobCard}</div>
+      <div className="list__cards">{renderCard}</div>
       <div className="list__pagination">
         <Pagination
           currentPage={pagination.currentPage}
@@ -26,10 +26,10 @@ const JobLists = ({ data, jobId, pagination }) => {
   );
 };
 
-JobLists.propTypes = {
+Lists.propTypes = {
   data: PropTypes.array.isRequired,
   jobId: PropTypes.object.isRequired,
   pagination: PropTypes.object.isRequired,
 };
 
-export default JobLists;
+export default Lists;

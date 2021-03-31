@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import 'styles/JobCard.css';
+import 'components/Main/Card/Card.css';
 import { checkDate } from 'helpers/helpers';
 
-const JobCard = ({ innerKey, data, id }) => {
+const Card = ({ innerKey, data, id }) => {
   const { jobId, setJobId } = id;
 
   const openJobDetails = () => {
@@ -41,10 +41,10 @@ const JobCard = ({ innerKey, data, id }) => {
   );
 };
 
-JobCard.propTypes = {
+Card.propTypes = {
   innerKey: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   id: PropTypes.object.isRequired,
 };
 
-export default JobCard;
+export default Card;

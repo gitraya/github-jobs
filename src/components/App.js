@@ -1,15 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
-import Footer from 'components/Footer';
-import SearchJobs from 'components/SearchJobs';
-import FilterJobs from 'components/FilterJobs';
-import JobLists from 'components/JobLists';
-import JobDescPage from 'components/JobDescPage';
+import Footer from 'components/Footer/Footer';
+import Search from 'components/Aside/Search/Search';
+import Filter from 'components/Aside/Filter/Filter';
+import Lists from 'components/Main/Lists/Lists';
+import InnerPage from 'components/Main/InnerPage/InnerPage';
+import { getData, getPosition } from 'helpers/helpers';
 import { useLoading, ThreeDots } from '@agney/react-loading';
 
-function App() {
-  // cors api url
-  const cors_api = 'https://cors-anywhere-venky.herokuapp.com/';
-
+const App = () => {
   // react state for loading indicator
   const [isLoading, setIsLoading] = useState(false);
   const { containerProps, indicatorEl } = useLoading({
@@ -33,49 +31,17 @@ function App() {
     page: 1,
   });
 
-  // check url
-  const checkUrl = (searchParams) => {
-    let url = new URL('https://jobs.github.com/positions.json');
-
-    url.search = new URLSearchParams({
-      page: Number(searchParams.page),
-      description: searchParams.description.toLowerCase(),
-      full_time: `${searchParams.isFulltime ? 'true' : ''}`,
-      location: searchParams.location.toLowerCase(),
-    });
-
-    return url;
-  };
-
-  // retrieve data from GitHub API
-  const getData = async (searchParams) => {
-    setIsLoading(true);
-    await fetch(`${cors_api}${checkUrl(searchParams)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setBackupData(data);
-        setAllData(data);
-      })
-      .catch((err) => console.log(err));
-    setIsLoading(false);
-  };
-
   // get user location
-  const getUserLocation = async () =>
-    await navigator.geolocation.getCurrentPosition(getPosition);
-
-  // get user position and get jobs data from github
-  const getPosition = async ({ coords }) => {
-    await fetch(
-      `${cors_api}https://jobs.github.com/positions.json?lat=${coords.latitude}&long=${coords.longitude}`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setBackupData(data);
-        setAllData(data);
-        if (data.length < 1) setIsLoading(true);
-      })
-      .catch((err) => console.log(err));
+  const getUserLocation = async () => {
+    let data;
+    if (navigator.geolocation) {
+      try {
+        data = await navigator.geolocation.getCurrentPosition(getPosition);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    return data;
   };
 
   // filter data by full time type
@@ -91,7 +57,7 @@ function App() {
   const inputLocationRef = useRef(null);
   const sendSearch = (searchParams) => {
     setCurrentPage(1);
-    getData(searchParams);
+    getData(searchParams, setAllData, setBackupData, setIsLoading);
   };
 
   // change the page number
@@ -99,17 +65,31 @@ function App() {
   const paginateAllData = (number) => {
     setSearchParams({ ...searchParams, page: number });
     setCurrentPage(1);
-    getData({ ...searchParams, page: number });
+    getData(
+      { ...searchParams, page: number },
+      setAllData,
+      setBackupData,
+      setIsLoading
+    );
   };
 
   // use effect to get data from API
   useEffect(() => {
     const getAllData = async () => {
-      if (navigator.geolocation && !allData) {
-        await getUserLocation();
-        if ((allData && allData.length < 1) || !allData) {
-          setIsLoading(true);
-          return getData(searchParams);
+      if (!allData) {
+        try {
+          const data = await getUserLocation();
+          if (!data)
+            return getData(
+              searchParams,
+              setAllData,
+              setBackupData,
+              setIsLoading
+            );
+          setBackupData(data);
+          setAllData(data);
+        } catch (error) {
+          console.log(error);
         }
       }
     };
@@ -132,15 +112,15 @@ function App() {
         </div>
       </header>
       {jobId.display ? (
-        <JobDescPage id={jobId.id} allData={allData} pageState={setJobId} />
+        <InnerPage id={jobId.id} allData={allData} pageState={setJobId} />
       ) : (
         <main>
-          <SearchJobs
+          <Search
             sendSearch={sendSearch}
             searchData={{ searchParams, setSearchParams }}
             forwardedRef={inputLocationRef}
           />
-          <FilterJobs
+          <Filter
             ref={inputLocationRef}
             filterSearch={fulltimeFilter}
             sendSearch={sendSearch}
@@ -153,7 +133,7 @@ function App() {
           ) : allData && allData.length < 1 ? (
             <div className="not-found">No results found</div>
           ) : currentData ? (
-            <JobLists
+            <Lists
               data={currentData}
               jobId={{ jobId, setJobId }}
               pagination={{
@@ -173,6 +153,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

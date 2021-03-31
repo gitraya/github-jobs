@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
-import 'styles/SearchJobs.css';
+import 'components/Aside/Search/Search.css';
 
-const SearchJobs = ({ sendSearch, searchData, forwardedRef }) => {
+const Search = ({ sendSearch, searchData, forwardedRef }) => {
   const { searchParams, setSearchParams } = searchData;
   const inputRef = useRef(null);
 
@@ -47,10 +47,10 @@ const SearchJobs = ({ sendSearch, searchData, forwardedRef }) => {
   );
 };
 
-SearchJobs.propTypes = {
+Search.propTypes = {
   sendSearch: PropTypes.func.isRequired,
   searchData: PropTypes.object.isRequired,
   forwardedRef: PropTypes.object.isRequired,
 };
 
-export default SearchJobs;
+export default Search;

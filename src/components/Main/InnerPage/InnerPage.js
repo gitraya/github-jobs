@@ -1,9 +1,9 @@
 import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import 'styles/JobDescPage.css';
+import 'components/Main/InnerPage/InnerPage.css';
 import { checkDate } from 'helpers/helpers';
 
-const JobDescPage = ({ id, allData, pageState }) => {
+const InnerPage = ({ id, allData, pageState }) => {
   // filtering data
   const data = allData.filter((data) => data.id === id)[0];
 
@@ -68,10 +68,10 @@ const JobDescPage = ({ id, allData, pageState }) => {
   );
 };
 
-JobDescPage.propTypes = {
+InnerPage.propTypes = {
   id: PropTypes.string.isRequired,
   allData: PropTypes.array.isRequired,
   pageState: PropTypes.func.isRequired,
 };
 
-export default JobDescPage;
+export default InnerPage;

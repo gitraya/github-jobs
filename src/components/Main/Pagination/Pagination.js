@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import 'styles/Pagination.css';
+import 'components/Main/Pagination/Pagination.css';
 import { v4 as uuidv4 } from 'uuid';
 
 const Pagination = ({
@@ -57,7 +57,9 @@ const Pagination = ({
           : ''}
 
         {/* to the first page */}
-        {pageNumbers.length > 5 && currentPage > pageNumbers.length / 2 - 1 ? (
+        {currentPage !== 2 &&
+        pageNumbers.length > 3 &&
+        currentPage > pageNumbers.length / 2 - 1 ? (
           <li key={pageNumbers[0]} className="paginate-control">
             <button
               className="paginate-item"
@@ -72,7 +74,9 @@ const Pagination = ({
         )}
 
         {/* more icon */}
-        {pageNumbers.length > 5 && currentPage > pageNumbers.length / 2 - 1 ? (
+        {currentPage !== 2 &&
+        pageNumbers.length > 3 &&
+        currentPage > pageNumbers.length / 2 - 1 ? (
           <li key={uuidv4()} className="paginate-control">
             <button className="paginate-item more" type="button">
               <i class="material-icons-round">more_horiz</i>
@@ -102,7 +106,7 @@ const Pagination = ({
           : ''}
 
         {/* more icon */}
-        {pageNumbers.length > 5 && currentPage < pageNumbers.length / 2 + 1 ? (
+        {pageNumbers.length > 3 && currentPage < pageNumbers.length / 2 + 1 ? (
           <li key={uuidv4()} className="paginate-control">
             <button className="paginate-item more" type="button">
               <i class="material-icons-round">more_horiz</i>
@@ -113,7 +117,7 @@ const Pagination = ({
         )}
 
         {/* to the last page */}
-        {pageNumbers.length > 5 && currentPage < pageNumbers.length / 2 + 1 ? (
+        {pageNumbers.length > 3 && currentPage < pageNumbers.length / 2 + 1 ? (
           <li
             key={pageNumbers[pageNumbers.length - 1]}
             className="paginate-control"
